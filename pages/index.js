@@ -1,33 +1,39 @@
 import Link from "next/link";
+import Card from "../components/Card";
+import Layout from "../components/Layout";
 import { Pagination } from "../components/Pagination";
+import SideParts from "../components/SideParts";
 import { client } from "../libs/client";
 import { perPage } from "../pageCount";
-
+import styles from "../styles/Home.module.scss";
 export default function Home({ blog, category, tags, totalCount }) {
   return (
     <div>
-      <ul>
-        {category.map((category) => (
-          <li key={category.id}>
-            <Link href={`/category/${category.id}`}>{category.name}</Link>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {tags.map((tag) => (
-          <li key={tag.id}>
-            <Link href={`/tag/${tag.id}`}>{tag.name}</Link>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {blog.map((blog) => (
-          <li key={blog.id}>
-            <Link href={`/blog/${blog.id}`}>{blog.title}</Link>
-          </li>
-        ))}
-      </ul>
-      <Pagination totalCount={totalCount} />
+      <Layout pageName="Home">
+        <div className={styles.wrapper}>
+          <h2 className={styles.heading}>Home</h2>
+          <div className={styles.grid}>
+            <div className={styles.content}>
+              <ul>
+                {blog.map((blog) => (
+                  <Card key={blog.id} blog={blog} />
+                ))}
+              </ul>
+
+              <div className={styles.btn__blogPage}>
+                <Link href="/blog/page/1">ブログ一覧　&gt;</Link>
+              </div>
+            </div>
+            <div className={styles.side}>
+              <SideParts items={category} name="カテゴリー" slug="category" />
+              <SideParts items={tags} name="タグ" slug="tag" />
+            </div>
+          </div>
+        </div>
+      </Layout>
+      {/* 
+        <Pagination totalCount={totalCount} /> */}
+      {/*  */}
     </div>
   );
 }

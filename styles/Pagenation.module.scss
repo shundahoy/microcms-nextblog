@@ -1,9 +1,19 @@
 .pageNation {
-  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
   li {
-    background-color: black;
+    display: block;
+    a {
+      font-size: 16px;
+      display: block;
+      width: fit-content;
+      padding: 8px 12px;
+      color: #fff;
+      border: 1px solid #fff;
+    }
   }
   li.active {
-    background-color: red;
+    background-color: rgba($color: #000000, $alpha: 1);
   }
 }
